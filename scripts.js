@@ -138,18 +138,32 @@ function updateWater(fillPercent, color) {
   waterEllipse.setAttribute("fill", color);
 }
 
+function updateScoreDrop(color) {
+  // Update the drop color only (no score value)
+  const dropPath = document.getElementById('scoreDropPath');
+  if (dropPath) dropPath.setAttribute('fill', color);
+}
+
+function updateScoreDisplay(color = "#00bfff") {
+  const badge = document.querySelector('.score-badge span');
+  const scoreEl = document.getElementById('score');
+  if (badge) badge.textContent = score;
+  if (scoreEl) scoreEl.textContent = score;
+  updateScoreDrop(color);
+}
+
 function submitAnswer(userAnswer) {
   if (currentQuestion >= questions.length) return;
   const correct = questions[currentQuestion].answer;
   let color;
   if (userAnswer === correct) {
     score += 10;
-    color = "#00bfff"; // blue
+    color = "#00bfff"; // blue (fresh)
   } else {
     score = Math.max(0, score - 10);
-    color = "#00ff66"; // green
+    color = "#00ff66"; // green (dirty)
   }
-  document.getElementById("score").innerText = score;
+  updateScoreDisplay(color);
   const maxScore = questions.length * 10;
   const percent = Math.min((score / maxScore), 1);
   updateWater(percent, color);
@@ -160,7 +174,7 @@ function submitAnswer(userAnswer) {
 document.getElementById("resetBtn").onclick = function () {
   score = 0;
   currentQuestion = 0;
-  document.getElementById("score").innerText = "0";
+  updateScoreDisplay("#00bfff");
   updateWater(0, "#00bfff");
   // Restore question and answer section
   const questionSection = document.querySelector('.question');
@@ -173,6 +187,7 @@ document.getElementById("resetBtn").onclick = function () {
 
 window.onload = function() {
   updateWater(0, "#00bfff");
+  updateScoreDisplay("#00bfff");
   updateQuestion();
 
   // Show popup on page load
@@ -192,4 +207,21 @@ window.onload = function() {
       popup.classList.remove("active");
     }
   };
+
+  // Dark mode toggle
+  const darkModeBtn = document.getElementById("darkModeToggle");
+  darkModeBtn.onclick = function () {
+    document.body.classList.toggle("dark-mode");
+    // Optionally, persist dark mode in localStorage
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("waterRushDarkMode", "1");
+    } else {
+      localStorage.removeItem("waterRushDarkMode");
+    }
+  };
+
+  // Load dark mode preference
+  if (localStorage.getItem("waterRushDarkMode") === "1") {
+    document.body.classList.add("dark-mode");
+  }
 };

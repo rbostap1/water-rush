@@ -1,10 +1,19 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #fff;
+  background-size: 1200% 1200%;
+  animation: gradientBG 18s ease infinite;
   margin: 0;
   padding: 0;
   text-align: center;
   color: #000;
+}
+
+@keyframes gradientBG {
+  0% {background-position:0% 50%}
+  25% {background-position:50% 100%}
+  50% {background-position:100% 50%}
+  75% {background-position:50% 0%}
+  100% {background-position:0% 50%}
 }
 
 .container {
@@ -238,6 +247,63 @@ button:hover,
   transform: translateY(-2px) scale(1.04);
 }
 
+.water-drop {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 8px auto;
+  animation: dropBounce 1.6s infinite;
+  display: block;
+}
+
+@keyframes dropBounce {
+  0% { transform: translateY(-30px) scaleY(1.1);}
+  30% { transform: translateY(0) scaleY(0.95);}
+  50% { transform: translateY(-8px) scaleY(1.05);}
+  70% { transform: translateY(0) scaleY(0.98);}
+  100% { transform: translateY(-30px) scaleY(1.1);}
+}
+
+.score-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #00b4d8 0%, #48cae4 100%);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 18px;
+  padding: 0.4em 1.2em;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px #00b4d822;
+  letter-spacing: 1px;
+  animation: glowScore 1.5s infinite alternate;
+}
+
+@keyframes glowScore {
+  from { box-shadow: 0 0 8px #00b4d8, 0 0 16px #48cae4; }
+  to { box-shadow: 0 0 18px #48cae4, 0 0 32px #00b4d8; }
+}
+
+.glass-outer.pulse {
+  animation: pulseGlass 0.7s 4;
+}
+
+@keyframes pulseGlass {
+  0% { transform: scale(1);}
+  30% { transform: scale(1.08);}
+  60% { transform: scale(0.97);}
+  100% { transform: scale(1);}
+}
+
+#winMessage {
+  animation: bounceIn 1s;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  80% { transform: scale(0.95);}
+  100% { transform: scale(1);}
+}
+
 @media (max-width: 500px) {
   .glass-outer {
     height: 120px;
@@ -339,4 +405,95 @@ button:hover,
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+.water-drop-score {
+  width: 48px;
+  height: 60px;
+  margin: 0 auto 18px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  animation: dropBounce 1.6s infinite;
+}
+
+.water-drop-score svg {
+  width: 48px;
+  height: 60px;
+  display: block;
+}
+
+.water-drop-score .score-inside {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 8px #00b4d8, 0 0 2px #0008;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #181c22;
+  color: #e0f7fa;
+}
+
+/* Make all text in dark mode light for contrast */
+body.dark-mode,
+body.dark-mode .container,
+body.dark-mode .main-content,
+body.dark-mode .side-content,
+body.dark-mode .score-badge,
+body.dark-mode .glass-outer,
+body.dark-mode .glass,
+body.dark-mode .glass-svg,
+body.dark-mode .glass-svg ellipse,
+body.dark-mode .glass-svg rect,
+body.dark-mode .glass-svg .glass-outline,
+body.dark-mode .glass-svg .glass-shine,
+body.dark-mode .score-inside,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode .title,
+body.dark-mode .rush,
+body.dark-mode .instruction,
+body.dark-mode .question,
+body.dark-mode .score,
+body.dark-mode #winMessage {
+  color: #e0f7fa !important;
+  text-shadow: 1px 1px #111;
+}
+
+/* Popup in dark mode */
+body.dark-mode .rules-popup,
+body.dark-mode .rules-content {
+  background: #23272f !important;
+  color: #e0f7fa !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+
+body.dark-mode .rules-content h3 {
+  color: #48cae4 !important;
+}
+
+body.dark-mode .rules-content ul,
+body.dark-mode .rules-content li {
+  color: #e0f7fa !important;
+}
+
+body.dark-mode .rules-content button {
+  background: linear-gradient(90deg, #232526 0%, #48cae4 100%) !important;
+  color: #fff !important;
+}
+
+body.dark-mode .rules-content button:hover {
+  background: linear-gradient(90deg, #48cae4 0%, #232526 100%) !important;
+  color: #fff !important;
 }
