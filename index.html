@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Water Rush</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://www.charitywater.org/favicon.ico" alt="charity: water logo" class="logo">
+      <h1><em>Water Rush</em></h1>
+      <h2><em>Player Score: <span id="score">0</span></em></h2>
+      <button id="rulesBtn">Display Rules</button>
+    </header>
+
+    <main>
+      <div class="glass">
+        <div class="water" id="waterLevel"></div>
+      </div>
+      <p>Answer correctly to fill glass with fresh water.</p>
+      <hr>
+      <div class="question">
+        <p id="questionText">Water is everywhere?</p>
+        <button class="answer" onclick="submitAnswer(true)">True</button>
+        <button class="answer" onclick="submitAnswer(false)">False</button>
+      </div>
+    </main>
+
+    <footer>
+      <button id="resetBtn">Reset Game</button>
+    </footer>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+#gameContainer {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  padding: 2rem 2.5rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.logo {
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+h1, h2 {
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 1px 1px #ccc;
+}
+
+#questionText {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2d3a4b;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00b4d8;
+  margin-bottom: 1rem;
+}
+
+#waterGlass {
+  width: 90px;
+  height: 180px;
+  border: 4px solid #00b4d8;
+  border-radius: 0 0 40px 40px / 0 0 60px 60px;
+  background: #e0f7fa;
+  margin: 1.5rem auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,180,216,0.08);
+}
+
+.water {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background-color: #00bfff;
+  transition: height 0.5s ease-in-out;
+}
+
+#waterLevel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #48cae4 0%, #00b4d8 100%);
+  transition: height 0.5s cubic-bezier(.4,2,.6,1);
+  border-radius: 0 0 40px 40px / 0 0 60px 60px;
+  z-index: 1;
+}
+
+button {
+  background: linear-gradient(90deg, #00b4d8 0%, #48cae4 100%);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,180,216,0.10);
+  transition: background 0.2s, transform 0.1s;
+  margin: 10px auto;
+  padding: 10px 20px;
+  display: block;
+  width: 70%;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #48cae4 0%, #00b4d8 100%);
+  transform: translateY(-2px) scale(1.05);
+}
+
+#rulesBtn, #resetBtn {
+  background: #fff;
+  color: #00b4d8;
+  border: 2px solid #00b4d8;
+  margin: 0 0.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+#rulesBtn:hover, #resetBtn:hover {
+  background: #00b4d8;
+  color: #fff;
+}
+
+.glass {
+  width: 60px;
+  height: 100px;
+  margin: 20px auto;
+  border: 2px solid black;
+  position: relative;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 2px solid #FFD700;
+}
+
+@media (max-width: 500px) {
+  #gameContainer {
+    padding: 1rem;
+    max-width: 95vw;
+  }
+  #waterGlass {
+    width: 60px;
+    height: 120px;
+  }
+}
