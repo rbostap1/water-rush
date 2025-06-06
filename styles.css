@@ -1,11 +1,10 @@
 body {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0;
+  text-align: center;
+  color: #000;
 }
 
 .container {
@@ -14,22 +13,9 @@ body {
   padding: 20px;
 }
 
-#gameContainer {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
-  padding: 2rem 2.5rem;
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 350px;
-  width: 100%;
-}
-
 .logo {
-  height: 30px;
-  margin-bottom: 10px;
+  height: 50px;
+  margin-bottom: 30px;
 }
 
 h1, h2 {
@@ -38,94 +24,123 @@ h1, h2 {
   text-shadow: 1px 1px #ccc;
 }
 
-#questionText {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #2d3a4b;
+button {
+  font-size: 16px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: block;
+  width: 70%;
+}
+
+#rulesBtn, .answer {
+  background-color: #FFD700;
+  color: black;
+}
+
+#resetBtn {
+  background-color: red;
+  color: white;
+}
+
+.glass-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 200px;
   margin-bottom: 1.5rem;
-  text-align: center;
 }
 
-#score {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00b4d8;
-  margin-bottom: 1rem;
+.glass-outer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 220px;
+  margin-bottom: 1.5rem;
 }
 
-#waterGlass {
-  width: 90px;
-  height: 180px;
+.glass {
+  width: 80px;
+  height: 160px;
+  background: linear-gradient(180deg, #e0f7fa 80%, #b2ebf2 100%);
   border: 4px solid #00b4d8;
   border-radius: 0 0 40px 40px / 0 0 60px 60px;
-  background: #e0f7fa;
-  margin: 1.5rem auto;
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,180,216,0.08);
 }
 
-.water {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 0;
-  background-color: #00bfff;
-  transition: height 0.5s ease-in-out;
+.glass-svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 16px #00b4d822);
 }
 
-#waterLevel {
+.glass-rim {
+  position: absolute;
+  top: -10px;
+  left: -4px;
+  width: 88px;
+  height: 20px;
+  background: transparent;
+  border: 4px solid #00b4d8;
+  border-bottom: none;
+  border-radius: 44px 44px 0 0 / 20px 20px 0 0;
+  z-index: 2;
+}
+
+.water {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(180deg, #48cae4 0%, #00b4d8 100%);
-  transition: height 0.5s cubic-bezier(.4,2,.6,1);
+  height: 0;
+  background-color: #00bfff;
   border-radius: 0 0 40px 40px / 0 0 60px 60px;
+  transition: height 0.5s cubic-bezier(.4,2,.6,1), background-color 0.3s;
   z-index: 1;
+  box-shadow: 0 0 16px 2px #00bfff44 inset;
 }
 
-button {
-  background: linear-gradient(90deg, #00b4d8 0%, #48cae4 100%);
-  color: #fff;
-  border: none;
-  border-radius: 18px;
-  padding: 0.7rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,180,216,0.10);
-  transition: background 0.2s, transform 0.1s;
-  margin: 10px auto;
-  padding: 10px 20px;
-  display: block;
-  width: 70%;
+#waterFill {
+  transition: height 0.5s cubic-bezier(.4,2,.6,1), y 0.5s cubic-bezier(.4,2,.6,1), fill 0.3s;
 }
 
-button:hover {
-  background: linear-gradient(90deg, #48cae4 0%, #00b4d8 100%);
-  transform: translateY(-2px) scale(1.05);
+#waterEllipse {
+  transition: fill 0.3s;
 }
 
-#rulesBtn, #resetBtn {
-  background: #fff;
-  color: #00b4d8;
-  border: 2px solid #00b4d8;
-  margin: 0 0.5rem;
-  transition: background 0.2s, color 0.2s;
+.glass-svg ellipse,
+.glass-svg rect {
+  /* Give the glass a subtle shine and transparency */
+  opacity: 0.85;
 }
 
-#rulesBtn:hover, #resetBtn:hover {
-  background: #00b4d8;
-  color: #fff;
+.glass-svg .glass-outline {
+  stroke: #00b4d8;
+  stroke-width: 4;
+  fill: none;
 }
 
-.glass {
-  width: 60px;
-  height: 100px;
-  margin: 20px auto;
-  border: 2px solid black;
-  position: relative;
+.glass-svg .glass-shine {
+  fill: url(#shineGradient);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 30px;
+  width: 12px;
+  height: 80px;
+  background: linear-gradient(90deg, #fff6, #fff0 70%);
+  border-radius: 10px;
+  z-index: 3;
+  pointer-events: none;
 }
 
 hr {
@@ -134,13 +149,194 @@ hr {
   border-top: 2px solid #FFD700;
 }
 
+.rules-popup {
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+.rules-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rules-content {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem 1.5rem;
+  max-width: 350px;
+  width: 90vw;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  text-align: left;
+  position: relative;
+  transform: translateY(-30px) scale(0.97);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+.rules-popup.active .rules-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.rules-content h3 {
+  margin-top: 0;
+  color: #00b4d8;
+  font-size: 1.3rem;
+}
+
+.rules-content ul {
+  padding-left: 1.2em;
+  margin: 1em 0;
+}
+
+.rules-content button {
+  background: linear-gradient(90deg, #00b4d8 0%, #48cae4 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 1em;
+  float: right;
+  box-shadow: 0 2px 8px rgba(0,180,216,0.10);
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.rules-content button:hover {
+  background: linear-gradient(90deg, #48cae4 0%, #00b4d8 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,180,216,0.15);
+  transform: translateY(-2px) scale(1.04);
+}
+
+button,
+#rulesBtn,
+.answer,
+#resetBtn,
+.rules-content button {
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+button:hover,
+#rulesBtn:hover,
+.answer:hover,
+#resetBtn:hover,
+.rules-content button:hover {
+  background-color: #00b4d8;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,180,216,0.15);
+  transform: translateY(-2px) scale(1.04);
+}
+
 @media (max-width: 500px) {
-  #gameContainer {
-    padding: 1rem;
-    max-width: 95vw;
-  }
-  #waterGlass {
-    width: 60px;
+  .glass-outer {
     height: 120px;
+  }
+  .glass-svg {
+    width: 48px !important;
+    height: 96px !important;
+  }
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 501px) {
+  .container {
+    max-width: 900px;
+    padding: 40px 20px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .logo {
+    height: 80px;
+    margin-bottom: 40px;
+  }
+
+  .main-content {
+    flex: 2;
+    min-width: 320px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .side-content {
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .glass-outer {
+    margin-bottom: 2.5rem;
+    height: 240px;
+  }
+
+  .glass-svg {
+    width: 120px !important;
+    height: 240px !important;
+  }
+
+  h1, h2 {
+    font-size: 2.2rem;
+  }
+
+  .rules-popup .rules-content {
+    max-width: 400px;
+  }
+}
+
+/* Bootstrap-like grid helpers for layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col {
+  flex: 1 0 0%;
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.col-4 {
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-8 {
+  flex: 0 0 66.6666%;
+  max-width: 66.6666%;
+}
+
+@media (max-width: 500px) {
+  .row {
+    flex-direction: column;
+  }
+  .col, .col-4, .col-6, .col-8 {
+    max-width: 100%;
+    flex: 0 0 100%;
+    padding-right: 0;
+    padding-left: 0;
   }
 }
