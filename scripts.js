@@ -24,8 +24,22 @@ function playClap() {
     clap.preload = 'auto';
     document.body.appendChild(clap);
   }
-  clap.currentTime = 0;
-  clap.play();
+  // Play with a user gesture if possible
+  if (typeof clap.play === "function") {
+    clap.currentTime = 0;
+    // Some browsers require play() to be called after a user gesture
+    const playPromise = clap.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Try again on next user gesture
+        const resume = () => {
+          clap.play();
+          document.removeEventListener('click', resume);
+        };
+        document.addEventListener('click', resume);
+      });
+    }
+  }
 }
 
 function showConfetti() {
@@ -171,9 +185,18 @@ function submitAnswer(userAnswer) {
   updateQuestion();
 }
 
+// Shuffle questions array using Fisher-Yates algorithm
+function shuffleQuestions(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
 document.getElementById("resetBtn").onclick = function () {
   score = 0;
   currentQuestion = 0;
+  shuffleQuestions(questions);
   updateScoreDisplay("#00bfff");
   updateWater(0, "#00bfff");
   // Restore question and answer section
@@ -186,6 +209,7 @@ document.getElementById("resetBtn").onclick = function () {
 };
 
 window.onload = function() {
+  shuffleQuestions(questions);
   updateWater(0, "#00bfff");
   updateScoreDisplay("#00bfff");
   updateQuestion();
@@ -203,6 +227,24 @@ window.onload = function() {
   };
 
   document.getElementById("closeRulesBtn").onclick = function () {
+    // User gesture: play and pause the clap sound to unlock audio for later
+    let clap = document.getElementById('clap-audio');
+    if (!clap) {
+      clap = document.createElement('audio');
+      clap.id = 'clap-audio';
+      clap.src = 'https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa1c82.mp3';
+      clap.preload = 'auto';
+      document.body.appendChild(clap);
+    }
+    // Unlock audio by playing and pausing on user gesture
+    try {
+      clap.volume = 0;
+      clap.play().then(() => {
+        clap.pause();
+        clap.currentTime = 0;
+        clap.volume = 1;
+      }).catch(() => {});
+    } catch {}
     if (popup) {
       popup.classList.remove("active");
     }

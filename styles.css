@@ -78,6 +78,9 @@ button {
 #resetBtn {
   background-color: red;
   color: white;
+  font-size: 18px;
+  padding: 7px 16px;
+  width: 50%;
 }
 
 .glass-wrapper {
@@ -267,11 +270,31 @@ button:hover,
 #rulesBtn:hover,
 .answer:hover,
 #resetBtn:hover,
-.rules-content button:hover {
-  background-color: #00b4d8;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(0,180,216,0.15);
+.rules-content button:hover,
+.btn-main:hover,
+.btn-yellow:hover,
+.btn-red:hover,
+.btn-blue:hover {
+  background-color: #0099cc !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(0,153,204,0.18);
   transform: translateY(-2px) scale(1.04);
+}
+
+/* Remove hover effect on touch/click */
+button:active,
+#rulesBtn:active,
+.answer:active,
+#resetBtn:active,
+.rules-content button:active,
+.btn-main:active,
+.btn-yellow:active,
+.btn-red:active,
+.btn-blue:active {
+  background-color: inherit !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .water-drop {
