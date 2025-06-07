@@ -8,10 +8,13 @@
 </head>
 <body>
   <div class="container">
-    <!-- Add .row and columns for large screens -->
+    <div class="row">
+      <div class="col-12 logo-center">
+        <img src="Assets/cw_Brand-UsageGuide.pdf.png" alt="charity: water logo" class="logo">
+      </div>
+    </div>
     <div class="row">
       <div class="col-4 side-content">
-        <img src="Assets/cw_Brand-UsageGuide.pdf.png" alt="charity: water logo" class="logo">
         <!-- Water drop score display (drop only, no score text) -->
         <div class="water-drop-score">
           <svg id="scoreDropSvg" viewBox="0 0 48 60">
@@ -36,9 +39,10 @@
       </div>
       <div class="col-8 main-content">
         <h1 class="title">Water <span class="rush">Rush</span></h1>
-        <button id="rulesBtn">Display Rules</button>
-        <!-- Dark mode toggle button -->
-        <button id="darkModeToggle" style="margin-bottom: 1rem;">Toggle Dark Mode</button>
+        <div class="rules-toggle-row">
+          <button id="rulesBtn">Display Rules</button>
+          <button id="darkModeToggle">Toggle Dark Mode</button>
+        </div>
         <p class="instruction">Answer correctly to fill glass with fresh water.</p>
         <hr>
         <div class="question">

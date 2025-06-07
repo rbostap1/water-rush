@@ -25,6 +25,32 @@ body {
 .logo {
   height: 50px;
   margin-bottom: 30px;
+  max-width: 90vw;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  .logo {
+    height: 36px;
+    margin-bottom: 18px;
+    max-width: 95vw;
+  }
+  .glass-outer {
+    height: 220px;
+  }
+  .glass-svg {
+    width: 120px !important;
+    height: 240px !important;
+  }
 }
 
 h1, h2 {
@@ -68,17 +94,18 @@ button {
   align-items: flex-end;
   height: 220px;
   margin-bottom: 1.5rem;
+  background: none;
 }
 
 .glass {
   width: 80px;
   height: 160px;
-  background: linear-gradient(180deg, #e0f7fa 80%, #b2ebf2 100%);
-  border: 4px solid #00b4d8;
+  background: rgba(20, 20, 20, 0.15);
+  border: none;
   border-radius: 0 0 40px 40px / 0 0 60px 60px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,180,216,0.08);
+  box-shadow: 0 4px 16px rgba(0,180,216,0.08), 0 1.5px 8px 0 #b2ebf2;
 }
 
 .glass-svg {
@@ -306,11 +333,11 @@ button:hover,
 
 @media (max-width: 500px) {
   .glass-outer {
-    height: 120px;
+    height: 220px;
   }
   .glass-svg {
-    width: 48px !important;
-    height: 96px !important;
+    width: 120px !important;
+    height: 240px !important;
   }
 }
 
@@ -496,4 +523,51 @@ body.dark-mode .rules-content button {
 body.dark-mode .rules-content button:hover {
   background: linear-gradient(90deg, #48cae4 0%, #232526 100%) !important;
   color: #fff !important;
+}
+
+.question {
+  background: linear-gradient(90deg, #e0f7fa 60%, #b2ebf2 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #00b4d822;
+  padding: 1.2em 1em 1.5em 1em;
+  margin: 1.5em auto 1em auto;
+  max-width: 420px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #0077a6;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.question p {
+  margin: 0 0 1em 0;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #0077a6;
+  text-shadow: 0 1px 0 #fff, 0 2px 8px #b2ebf2;
+  letter-spacing: 0.5px;
+}
+
+body.dark-mode .question {
+  background: linear-gradient(90deg, #23272f 60%, #2a3a4a 100%);
+  color: #48cae4;
+  box-shadow: 0 2px 16px #00b4d844;
+}
+
+body.dark-mode .question p {
+  color: #48cae4;
+  text-shadow: 0 1px 0 #23272f, 0 2px 8px #23272f;
+}
+
+.rules-toggle-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.rules-toggle-row button {
+  margin: 0;
+  width: auto;
+  min-width: 120px;
 }
